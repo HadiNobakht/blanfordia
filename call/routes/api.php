@@ -13,18 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/get/users', function (Request $request) {
-    return App\User::all();
-});
-
-Route::post('/get/user', function (Request $request) {
-	dd('inn');
-	if ($request->has('id')) {
-		return App\User::find($request->get('id'));
-	} else {
-		return [
-			'status' 	=> 'error' ,
-			'message' 	=> 'ID is not avaialable' ,
-		];
-	}
-});
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:api');
